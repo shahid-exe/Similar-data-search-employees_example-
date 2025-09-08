@@ -1,63 +1,44 @@
-Employee Similarity Search with ChromaDB
+# Employee Similarity Search with ChromaDB
 
-This project demonstrates how to build an AI-powered employee similarity and metadata search system using ChromaDB
- and SentenceTransformers
+This project demonstrates how to build an **AI-powered employee similarity and metadata search system** using [ChromaDB](https://docs.trychroma.com/) and [SentenceTransformers](https://www.sbert.net/).  
+It stores employee information, generates embeddings for semantic similarity search, and supports advanced filtering based on metadata (e.g., department, location, experience).  
+
+---
+
+## 🚀 Features
+- **Employee Database in ChromaDB**  
+  - Store structured employee data with metadata (role, department, skills, etc.).  
+- **Embeddings with SentenceTransformers**  
+  - Use the `all-MiniLM-L6-v2` model for efficient text vectorization.  
+- **Similarity Search**  
+  - Find employees based on semantic queries like _"Python developer with web development experience"_.  
+- **Metadata Filtering**  
+  - Query employees by department, location, or experience thresholds.  
+- **Combined Search**  
+  - Apply both similarity search and metadata filtering simultaneously.  
+
+---
+
+## 📂 Project Structure
 .
-It stores employee information, generates embeddings for semantic similarity search, and supports advanced filtering based on metadata (e.g., department, location, experience).
-
-🚀 Features
-
-Employee Database in ChromaDB
-
-Store structured employee data with metadata (role, department, skills, etc.).
-
-Embeddings with SentenceTransformers
-
-Use the all-MiniLM-L6-v2 model for efficient text vectorization.
-
-Similarity Search
-
-Find employees based on semantic queries like "Python developer with web development experience".
-
-Metadata Filtering
-
-Query employees by department, location, or experience thresholds.
-
-Combined Search
-
-Apply both similarity search and metadata filtering simultaneously.
-
-📂 Project Structure
-.
-├── main.py        # Main script (this file)
+├── main.py # Main script (this file)
 ├── requirements.txt
 └── README.md
 
-⚙️ Installation
 
-Clone the repository:
+---
 
-git clone https://github.com/your-username/employee-similarity-search.git
-cd employee-similarity-search
+## ⚙️ Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/employee-similarity-search.git
+   cd employee-similarity-search
 
-
-Create a virtual environment (optional but recommended):
-
-python -m venv venv
-source venv/bin/activate   # On Mac/Linux
-venv\Scripts\activate      # On Windows
-
-
-Install dependencies:
-
-pip install -r requirements.txt
-
-📦 Requirements
-
-Add the following to your requirements.txt:
-
-chromadb
-sentence-transformers
+2. Create a virtual environment (optional but recommended):
+   
+   python -m venv venv
+   source venv/bin/activate   # On Mac/Linux
+   venv\Scripts\activate      # On Windows
 
 ▶️ Usage
 
@@ -72,43 +53,48 @@ A new employee collection created in ChromaDB.
 
 Employee records inserted.
 
-Example queries and metadata filtering results printed.
+Example queries and metadata filtering results printed.   
+
 
 🔍 Example Queries
 
 Similarity Search
 Find Python developers:
 
-Query: "Python developer with web development experience"
-→ Returns top 3 employees ranked by similarity
+query_text = "Python developer with web development experience"
+results = collection.query(query_texts=[query_text], n_results=3)
 
 
 Metadata Filtering
 Find all employees in Engineering:
 
-where={"department": "Engineering"}
+results = collection.get(where={"department": "Engineering"})
 
 
 Find employees with 10+ years experience:
 
-where={"experience": {"$gte": 10}}
+results = collection.get(where={"experience": {"$gte": 10}})
 
 
 Find employees in California (SF + LA):
 
-where={"location": {"$in": ["San Francisco", "Los Angeles"]}}
+results = collection.get(where={"location": {"$in": ["San Francisco", "Los Angeles"]}})
 
 
 Combined Search
 Find senior Python developers in major tech cities:
 
-query="senior Python developer full-stack"
-where={
-    "$and": [
-        {"experience": {"$gte": 8}},
-        {"location": {"$in": ["San Francisco", "New York", "Seattle"]}}
-    ]
-}
+query_text = "senior Python developer full-stack"
+results = collection.query(
+    query_texts=[query_text],
+    n_results=5,
+    where={
+        "$and": [
+            {"experience": {"$gte": 8}},
+            {"location": {"$in": ["San Francisco", "New York", "Seattle"]}}
+        ]
+    }
+)
 
 📊 Output Example
 1. Searching for Python developers:
