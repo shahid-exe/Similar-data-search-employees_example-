@@ -31,8 +31,8 @@ It stores employee information, generates embeddings for semantic similarity sea
 ## ⚙️ Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/employee-similarity-search.git
-   cd employee-similarity-search
+   git clone https://github.com/shahid-exe/Similar-data-search-employees_example-
+   cd Similar-data-search-employees_example
 
 2. Create a virtual environment (optional but recommended):
    
