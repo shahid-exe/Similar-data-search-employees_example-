@@ -22,9 +22,7 @@ It stores employee information, generates embeddings for semantic similarity sea
 ## 📂 Project Structure
 .
 ├── main.py # Main script (this file)
-
 ├── requirements.txt
-
 └── README.md
 
 
